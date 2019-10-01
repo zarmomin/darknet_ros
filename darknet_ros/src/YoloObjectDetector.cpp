@@ -331,7 +331,7 @@ void *YoloObjectDetector::detectInThread()
 
   layer l = net_->layers[net_->n - 1];
   float *X = buffLetter_[(buffIndex_ + 2) % 3].data;
-  float *prediction = network_predict(net_, X);
+  float *prediction = network_predict(*net_, X);
 
   rememberNetwork(net_);
   detection *dets = 0;
@@ -347,7 +347,7 @@ void *YoloObjectDetector::detectInThread()
     printf("Objects:\n\n");
   }
   image display = buff_[(buffIndex_+2) % 3];
-  draw_detections(display, dets, nboxes, demoThresh_, demoNames_, demoAlphabet_, demoClasses_);
+  draw_detections_v3(display, dets, nboxes, demoThresh_, demoNames_, demoAlphabet_, demoClasses_, 0);
 
   // extract the bounding boxes and send them to ROS
   int i, j;
