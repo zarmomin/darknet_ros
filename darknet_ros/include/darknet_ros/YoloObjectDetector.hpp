@@ -46,10 +46,12 @@
 #endif
 
 extern "C" {
+#include "blas.h"
 #include "network.h"
 #include "detection_layer.h"
 #include "region_layer.h"
 #include "cost_layer.h"
+#include "image_opencv.h"
 #include "utils.h"
 #include "parser.h"
 #include "box.h"
@@ -59,7 +61,6 @@ extern "C" {
 
 extern "C" void ipl_into_image(IplImage* src, image im);
 extern "C" image ipl_to_image(IplImage* src);
-extern "C" void show_image_cv(image p, const char *name, IplImage *disp);
 
 namespace darknet_ros {
 
