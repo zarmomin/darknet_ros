@@ -59,9 +59,6 @@ extern "C" {
 #include <sys/time.h>
 }
 
-extern "C" void ipl_into_image(IplImage* src, image im);
-extern "C" image ipl_to_image(IplImage* src);
-
 namespace darknet_ros {
 
 //! Bounding box of the detected object.
@@ -73,9 +70,9 @@ typedef struct
 
 typedef struct
 {
-  IplImage* image;
+  image image;
   std_msgs::Header header;
-} IplImageWithHeader_;
+} ImageWithHeader_;
 
 class YoloObjectDetector
 {
@@ -178,7 +175,6 @@ class YoloObjectDetector
   image buffLetter_[3];
   int buffId_[3];
   int buffIndex_ = 0;
-  IplImage * ipl_;
   float fps_ = 0;
   float demoThresh_ = 0;
   float demoHier_ = .5;
@@ -240,7 +236,7 @@ class YoloObjectDetector
 
   void yolo();
 
-  IplImageWithHeader_ getIplImageWithHeader();
+  ImageWithHeader_ getImageWithHeader();
 
   bool getImageStatus(void);
 
