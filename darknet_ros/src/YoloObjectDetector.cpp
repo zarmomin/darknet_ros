@@ -408,12 +408,9 @@ void *YoloObjectDetector::fetchInThread()
 {
   {
     boost::shared_lock<boost::shared_mutex> lock(mutexImageCallback_);
-    ImageWithHeader_ imageAndHeader = getImageWithHeader();
-    buff_[buffIndex_] = copy_image(imageAndHeader.image);
-    headerBuff_[buffIndex_] = imageAndHeader.header;
+    buff_[buffIndex_] = mat_to_image(camImageCopy_);
+    headerBuff_[buffIndex_] = imageHeader_;
     buffId_[buffIndex_] = actionId_;
-    free_image(imageAndHeader.image);
-    //todo(nscheidt): maybe free_image(imageAndHeader.image)
   }
   rgbgr_image(buff_[buffIndex_]);
   letterbox_image_into(buff_[buffIndex_], net_->w, net_->h, buffLetter_[buffIndex_]);
@@ -505,10 +502,8 @@ void YoloObjectDetector::yolo()
 
   {
     boost::shared_lock<boost::shared_mutex> lock(mutexImageCallback_);
-    ImageWithHeader_ imageAndHeader = getImageWithHeader();
-    buff_[0] = copy_image(imageAndHeader.image);
-    headerBuff_[0] = imageAndHeader.header;
-    free_image(imageAndHeader.image);
+    buff_[0] = mat_to_image(camImageCopy_);
+    headerBuff_[0] = imageHeader_;    
   }
   buff_[1] = copy_image(buff_[0]);
   buff_[2] = copy_image(buff_[0]);

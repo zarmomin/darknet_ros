@@ -60,7 +60,7 @@ find_package(catkin REQUIRED
 )
 
 # Enable OPENCV in darknet
-add_definitions(-DOPENCV -DGPU)
+add_definitions(-DOPENCV)
 add_definitions(-O4 -g)
 
 catkin_package(
@@ -169,6 +169,14 @@ else()
 
     ${DARKNET_PATH}/src/activation_layer.c        ${DARKNET_PATH}/src/im2col.c
     ${DARKNET_PATH}/src/activations.c             ${DARKNET_PATH}/src/image.c
+    ${DARKNET_PATH}/src/conv_lstm_layer.c         ${DARKNET_PATH}/src/cpu_gemm.c
+    ${DARKNET_PATH}/src/dark_cuda.c               ${DARKNET_PATH}/src/region_layer.c
+    ${DARKNET_PATH}/src/darknet.c                 ${DARKNET_PATH}/src/detector.c
+    ${DARKNET_PATH}/src/getopt.c                  ${DARKNET_PATH}/src/gettimeofday.c
+    ${DARKNET_PATH}/src/go.c                      ${DARKNET_PATH}/src/http_stream.cpp
+    ${DARKNET_PATH}/src/image_opencv.cpp          ${DARKNET_PATH}/src/reorg_old_layer.c
+    ${DARKNET_PATH}/src/sam_layer.c               ${DARKNET_PATH}/src/scale_channels_layer.c
+    ${DARKNET_PATH}/src/yolo_v2_class.cpp         ${DARKNET_PATH}/src/compare.c
     ${DARKNET_PATH}/src/avgpool_layer.c           ${DARKNET_PATH}/src/layer.c
     ${DARKNET_PATH}/src/batchnorm_layer.c         ${DARKNET_PATH}/src/list.c
     ${DARKNET_PATH}/src/blas.c                    ${DARKNET_PATH}/src/local_layer.c
@@ -179,7 +187,6 @@ else()
     ${DARKNET_PATH}/src/cost_layer.c              ${DARKNET_PATH}/src/normalization_layer.c
     ${DARKNET_PATH}/src/crnn_layer.c              ${DARKNET_PATH}/src/option_list.c
     ${DARKNET_PATH}/src/crop_layer.c              ${DARKNET_PATH}/src/parser.c
-    ${DARKNET_PATH}/src/cuda.c                    ${DARKNET_PATH}/src/region_layer.c
     ${DARKNET_PATH}/src/data.c                    ${DARKNET_PATH}/src/reorg_layer.c
     ${DARKNET_PATH}/src/deconvolutional_layer.c   ${DARKNET_PATH}/src/rnn_layer.c
     ${DARKNET_PATH}/src/demo.c                    ${DARKNET_PATH}/src/route_layer.c
@@ -187,18 +194,15 @@ else()
     ${DARKNET_PATH}/src/dropout_layer.c           ${DARKNET_PATH}/src/softmax_layer.c
     ${DARKNET_PATH}/src/gemm.c                    ${DARKNET_PATH}/src/tree.c
     ${DARKNET_PATH}/src/gru_layer.c               ${DARKNET_PATH}/src/utils.c
-    ${DARKNET_PATH}/src/upsample_layer.c          ${DARKNET_PATH}/src/logistic_layer.c
-    ${DARKNET_PATH}/src/l2norm_layer.c            ${DARKNET_PATH}/src/yolo_layer.c
-
-    ${DARKNET_PATH}/examples/art.c                ${DARKNET_PATH}/examples/lsd.c
-    ${DARKNET_PATH}/examples/attention.c          ${DARKNET_PATH}/examples/nightmare.c
-    ${DARKNET_PATH}/examples/captcha.c            ${DARKNET_PATH}/examples/regressor.c
-    ${DARKNET_PATH}/examples/cifar.c              ${DARKNET_PATH}/examples/rnn.c
-    ${DARKNET_PATH}/examples/classifier.c         ${DARKNET_PATH}/examples/segmenter.c
-    ${DARKNET_PATH}/examples/coco.c               ${DARKNET_PATH}/examples/super.c
-    ${DARKNET_PATH}/examples/darknet.c            ${DARKNET_PATH}/examples/tag.c
-    ${DARKNET_PATH}/examples/detector.c           ${DARKNET_PATH}/examples/yolo.c
-    ${DARKNET_PATH}/examples/go.c
+    ${DARKNET_PATH}/src/upsample_layer.c          ${DARKNET_PATH}/src/yolo_layer.c
+    ${DARKNET_PATH}/src/art.c                     ${DARKNET_PATH}/src/classifier.c
+    ${DARKNET_PATH}/src/nightmare.c               ${DARKNET_PATH}/src/captcha.c
+    ${DARKNET_PATH}/src/cifar.c                   ${DARKNET_PATH}/src/rnn.c
+    ${DARKNET_PATH}/src/coco.c                    ${DARKNET_PATH}/src/super.c
+    ${DARKNET_PATH}/src/darknet.c                 ${DARKNET_PATH}/src/tag.c
+    ${DARKNET_PATH}/src/yolo.c                    ${DARKNET_PATH}/src/dice.c
+    ${DARKNET_PATH}/src/rnn_vid.c                 ${DARKNET_PATH}/src/swag.c
+    ${DARKNET_PATH}/src/voxel.c                   ${DARKNET_PATH}/src/writing.c
   )
 
   target_link_libraries(${PROJECT_NAME}_lib
