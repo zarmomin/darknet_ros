@@ -7,7 +7,8 @@
   <arg name="ros_param_file"             default="$(find darknet_ros)/config/ros_arl.yaml"/>
 
   <param name="use_sim_time" value="true"/>
-  <node pkg="rosbag" type="play" name="rosbag" args="/home/nico/datasets/artifact/BAYESIAN_ARTS_for_yolo.bag -q -d 5 -r 0.1 --clock"/>
+  <node pkg="rosbag" type="play" name="rosbag" args="/home/nico/datasets/artifact/BAYESIAN_ARTS_for_yolo.bag --clock"/>
+  <node pkg="topic_tools" type="throttle" name="image_throttle" args="messages /camera/image_raw 0.1"/>
 
   <!-- Include main launch file -->
   <include file="$(find darknet_ros)/launch/darknet_ros.launch">

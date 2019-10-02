@@ -409,9 +409,11 @@ void *YoloObjectDetector::fetchInThread()
   {
     boost::shared_lock<boost::shared_mutex> lock(mutexImageCallback_);
     ImageWithHeader_ imageAndHeader = getImageWithHeader();
-    buff_[buffIndex_] = imageAndHeader.image;
+    buff_[buffIndex_] = copy_image(imageAndHeader.image);
     headerBuff_[buffIndex_] = imageAndHeader.header;
     buffId_[buffIndex_] = actionId_;
+    free_image(imageAndHeader.image);
+    //todo(nscheidt): maybe free_image(imageAndHeader.image)
   }
   rgbgr_image(buff_[buffIndex_]);
   letterbox_image_into(buff_[buffIndex_], net_->w, net_->h, buffLetter_[buffIndex_]);
@@ -504,8 +506,9 @@ void YoloObjectDetector::yolo()
   {
     boost::shared_lock<boost::shared_mutex> lock(mutexImageCallback_);
     ImageWithHeader_ imageAndHeader = getImageWithHeader();
-    buff_[0] = imageAndHeader.image;
+    buff_[0] = copy_image(imageAndHeader.image);
     headerBuff_[0] = imageAndHeader.header;
+    free_image(imageAndHeader.image);
   }
   buff_[1] = copy_image(buff_[0]);
   buff_[2] = copy_image(buff_[0]);
@@ -559,6 +562,7 @@ ImageWithHeader_ YoloObjectDetector::getImageWithHeader()
 {
   image ROS_img = mat_to_image(camImageCopy_);
   ImageWithHeader_ header = {.image = ROS_img, .header = imageHeader_};
+  //free_image(ROS_img);
   return header;
 }
 
@@ -577,10 +581,11 @@ bool YoloObjectDetector::isNodeRunning(void)
 void *YoloObjectDetector::publishInThread()
 {
   // Publish image.
-  cv::Mat cvImage;  
+  // todo(nscheidt): fix this!
+  /*cv::Mat cvImage;
   if (!publishDetectionImage(cv::Mat(cvImage))) {
     ROS_DEBUG("Detection image has not been broadcasted.");
-  }
+  }*/
 
   // Publish bounding boxes and detection result.
   int num = roiBoxes_[0].num;
