@@ -347,7 +347,7 @@ void *YoloObjectDetector::detectInThread()
     printf("Objects:\n\n");
   }
   image display = buff_[(buffIndex_+2) % 3];
-  draw_detections_v3(display, dets, nboxes, demoThresh_, demoNames_, demoAlphabet_, demoClasses_, 0);
+  draw_detections_old(display, dets, nboxes, demoThresh_, demoNames_, demoAlphabet_, demoClasses_);
 
   // extract the bounding boxes and send them to ROS
   int i, j;
@@ -503,7 +503,7 @@ void YoloObjectDetector::yolo()
   {
     boost::shared_lock<boost::shared_mutex> lock(mutexImageCallback_);
     buff_[0] = mat_to_image(camImageCopy_);
-    headerBuff_[0] = imageHeader_;    
+    headerBuff_[0] = imageHeader_;
   }
   buff_[1] = copy_image(buff_[0]);
   buff_[2] = copy_image(buff_[0]);
