@@ -557,8 +557,8 @@ void YoloObjectDetector::yolo()
 
 ImageWithHeader_ YoloObjectDetector::getImageWithHeader()
 {
-  image ROS_img = mat_to_image(&camImageCopy_);
-  IplImageWithHeader_ header = {.image = ROS_img, .header = imageHeader_};
+  image ROS_img = mat_to_image(camImageCopy_);
+  ImageWithHeader_ header = {.image = ROS_img, .header = imageHeader_};
   return header;
 }
 
@@ -577,7 +577,7 @@ bool YoloObjectDetector::isNodeRunning(void)
 void *YoloObjectDetector::publishInThread()
 {
   // Publish image.
-  cv::Mat cvImage = cv::cvarrToMat(ipl_);
+  cv::Mat cvImage;  
   if (!publishDetectionImage(cv::Mat(cvImage))) {
     ROS_DEBUG("Detection image has not been broadcasted.");
   }

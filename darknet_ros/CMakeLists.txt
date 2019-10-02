@@ -60,7 +60,7 @@ find_package(catkin REQUIRED
 )
 
 # Enable OPENCV in darknet
-add_definitions(-DOPENCV)
+add_definitions(-DOPENCV -DGPU)
 add_definitions(-O4 -g)
 
 catkin_package(
@@ -107,7 +107,7 @@ if (CUDA_FOUND)
     ${DARKNET_PATH}/src/go.c                      ${DARKNET_PATH}/src/http_stream.cpp
     ${DARKNET_PATH}/src/image_opencv.cpp          ${DARKNET_PATH}/src/reorg_old_layer.c
     ${DARKNET_PATH}/src/sam_layer.c               ${DARKNET_PATH}/src/scale_channels_layer.c
-    ${DARKNET_PATH}/src/yolo_console_dll.cpp      ${DARKNET_PATH}/src/yolo_v2_class.cpp
+    ${DARKNET_PATH}/src/yolo_v2_class.cpp         ${DARKNET_PATH}/src/compare.c
     ${DARKNET_PATH}/src/avgpool_layer.c           ${DARKNET_PATH}/src/layer.c
     ${DARKNET_PATH}/src/batchnorm_layer.c         ${DARKNET_PATH}/src/list.c
     ${DARKNET_PATH}/src/blas.c                    ${DARKNET_PATH}/src/local_layer.c
@@ -128,7 +128,7 @@ if (CUDA_FOUND)
     ${DARKNET_PATH}/src/upsample_layer.c          ${DARKNET_PATH}/src/yolo_layer.c
     ${DARKNET_PATH}/src/art.c                     ${DARKNET_PATH}/src/classifier.c
     ${DARKNET_PATH}/src/nightmare.c               ${DARKNET_PATH}/src/captcha.c
-    ${DARKNET_PATH}/src/cifar.c                   ${DARKNET_PATH}/src/rnn.c    
+    ${DARKNET_PATH}/src/cifar.c                   ${DARKNET_PATH}/src/rnn.c
     ${DARKNET_PATH}/src/coco.c                    ${DARKNET_PATH}/src/super.c
     ${DARKNET_PATH}/src/darknet.c                 ${DARKNET_PATH}/src/tag.c
     ${DARKNET_PATH}/src/yolo.c                    ${DARKNET_PATH}/src/dice.c
@@ -140,6 +140,7 @@ if (CUDA_FOUND)
     ${DARKNET_PATH}/src/blas_kernels.cu           ${DARKNET_PATH}/src/dropout_layer_kernels.cu
     ${DARKNET_PATH}/src/col2im_kernels.cu         ${DARKNET_PATH}/src/im2col_kernels.cu
     ${DARKNET_PATH}/src/convolutional_kernels.cu  ${DARKNET_PATH}/src/maxpool_layer_kernels.cu
+    ${DARKNET_PATH}/src/network_kernels.cu
   )
 
   target_link_libraries(${PROJECT_NAME}_lib

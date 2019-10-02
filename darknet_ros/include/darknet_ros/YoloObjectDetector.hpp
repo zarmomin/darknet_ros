@@ -51,7 +51,7 @@ extern "C" {
 #include "detection_layer.h"
 #include "region_layer.h"
 #include "cost_layer.h"
-#include "image_opencv.h"
+#include "image.h"
 #include "utils.h"
 #include "parser.h"
 #include "box.h"
@@ -70,7 +70,7 @@ typedef struct
 
 typedef struct
 {
-  image image;
+  ::image image;
   std_msgs::Header header;
 } ImageWithHeader_;
 
