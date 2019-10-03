@@ -106,6 +106,7 @@ if (CUDA_FOUND)
     ${DARKNET_PATH}/src/getopt.c                  ${DARKNET_PATH}/src/gettimeofday.c
     ${DARKNET_PATH}/src/go.c                      ${DARKNET_PATH}/src/http_stream.cpp
     ${DARKNET_PATH}/src/image_opencv.cpp          ${DARKNET_PATH}/src/reorg_old_layer.c
+    ${DARKNET_PATH}/src/image_opencv.c
     ${DARKNET_PATH}/src/sam_layer.c               ${DARKNET_PATH}/src/scale_channels_layer.c
     ${DARKNET_PATH}/src/yolo_v2_class.cpp         ${DARKNET_PATH}/src/compare.c
     ${DARKNET_PATH}/src/avgpool_layer.c           ${DARKNET_PATH}/src/layer.c
@@ -175,6 +176,7 @@ else()
     ${DARKNET_PATH}/src/getopt.c                  ${DARKNET_PATH}/src/gettimeofday.c
     ${DARKNET_PATH}/src/go.c                      ${DARKNET_PATH}/src/http_stream.cpp
     ${DARKNET_PATH}/src/image_opencv.cpp          ${DARKNET_PATH}/src/reorg_old_layer.c
+    ${DARKNET_PATH}/src/image_opencv.c
     ${DARKNET_PATH}/src/sam_layer.c               ${DARKNET_PATH}/src/scale_channels_layer.c
     ${DARKNET_PATH}/src/yolo_v2_class.cpp         ${DARKNET_PATH}/src/compare.c
     ${DARKNET_PATH}/src/avgpool_layer.c           ${DARKNET_PATH}/src/layer.c
